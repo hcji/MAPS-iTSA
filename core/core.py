@@ -305,6 +305,8 @@ def plot_results(drug, scores, fold_changes, true_targets=[], fc_thres = 1.05, s
             group.append('Not significant')
         elif (fold_change[i] < np.log2(fc_thres)) and (score[i] >= score_thres):
             group.append('Not significant')
+        elif np.isnan(score[i]):
+            group.append('Not significant')
         else:
             group.append('Significant')
     pltdata['Group'] = group
@@ -332,6 +334,11 @@ def plot_results(drug, scores, fold_changes, true_targets=[], fc_thres = 1.05, s
         else:
             texts.append(plt.text(x, y, s, fontsize = 13))
     
+    for i in pltdata.index:
+        x, y, s = pltdata.loc[i, 'Fold Change'], pltdata.loc[i, 'Score'], str(pltdata.loc[i, 'Gene Symbol']).split(';')[0]
+        if s in true_targets:
+            texts.append(plt.text(x, y, s, fontsize = 13))
+        
     adjust_text(texts, force_points=0.2, force_text=0.2,
             expand_points=(1, 1), expand_text=(1, 1),
             arrowprops=dict(arrowstyle="-", color='black', lw=0.5))

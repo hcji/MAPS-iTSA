@@ -84,7 +84,14 @@ for i in range(len(drugs)):
 
 
 '''
-5. Plot Target Ranking
+5. Plot Drug scatter
+'''
+
+plot_drugs('DHFR', scores, fold_changes, fc_thres = 1.05, score_thres=0.15)
+
+
+'''
+6. Plot Target Ranking
 '''
 
 plt_data = []

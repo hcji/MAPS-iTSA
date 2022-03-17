@@ -327,16 +327,18 @@ def plot_results(drug, scores, fold_changes, true_targets=[], fc_thres = 1.05, s
     markers = markers.reset_index(drop = True)
     markers = markers.iloc[:min(len(markers), top_markers),:]
     texts = []
+    labels = []
     for i in markers.index:
         x, y, s = markers.loc[i, 'Fold Change'], markers.loc[i, 'Score'], str(markers.loc[i, 'Gene Symbol']).split(';')[0]
         if s in true_targets:
             texts.append(plt.text(x, y, s, color = 'red', fontsize = 14, weight = 'semibold'))
         else:
             texts.append(plt.text(x, y, s, fontsize = 13))
+        labels.append(s)
     
     for i in pltdata.index:
         x, y, s = pltdata.loc[i, 'Fold Change'], pltdata.loc[i, 'Score'], str(pltdata.loc[i, 'Gene Symbol']).split(';')[0]
-        if s in true_targets:
+        if (s in true_targets) and (s not in labels):
             texts.append(plt.text(x, y, s, fontsize = 13))
         
     adjust_text(texts, force_points=0.2, force_text=0.2,
@@ -372,11 +374,11 @@ def plot_drugs(gene, scores, fold_changes, fc_thres = 1.05, score_thres=0.08, to
     group = []
     for i in range(len(drug)):
         if (fold_change[i] < np.log2(fc_thres)) and (score[i] < score_thres):
-            group.append('Others')
+            group.append('Not significant')
         elif (fold_change[i] >= np.log2(fc_thres)) and (score[i] < score_thres):
-            group.append('Others')
+            group.append('Not significant')
         elif (fold_change[i] < np.log2(fc_thres)) and (score[i] >= score_thres):
-            group.append('Others')
+            group.append('Not significant')
         else:
             group.append('Significant')
     pltdata['Group'] = group
@@ -384,7 +386,10 @@ def plot_drugs(gene, scores, fold_changes, fc_thres = 1.05, score_thres=0.08, to
     pltdata = pltdata.reset_index(drop = True)
     
     plt.figure(dpi = 250)
-    sns.scatterplot(data=pltdata, x="Fold Change", y="Score", hue="Group")
+    flatui = ['#FF0000', '#C0C0C0']
+    sns.scatterplot(data=pltdata, x="Fold Change", y="Score", hue="Group",
+                    palette = flatui,
+                    hue_order=['Significant', 'Not significant'] )
 
     markers = pltdata[pltdata['Group'] == 'Significant']
     markers = markers.sort_values(by = 'Score', ascending=False)

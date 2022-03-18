@@ -14,10 +14,10 @@ method = ['TPP-TR', 'TPP-CCR', 'iTSA/PISA', 'Pooled-TPP (9*9)', 'Pooled-TPP (9*1
 drugTMT = np.array([1/4, 1/2, 1, 9, 15])
 
 
-plt.figure(dpi = 300, figsize = (12, 5))
+plt.figure(dpi = 300, figsize = (14, 5))
 sns.barplot(x=method, y=np.log2(drugTMT + 0.02), palette='pastel')
 plt.xticks(fontsize = 18, rotation=20)
 plt.yticks(fontsize = 18)
 plt.xlabel('')
 plt.ylabel('No. of drugs per TMT Expt.(Log2)', fontsize = 20)
-plt.ylim(-3, 5)
+plt.ylim(-4, 7)

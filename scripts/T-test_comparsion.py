@@ -48,7 +48,11 @@ def plot_ranking(data, gene):
     adjust_text(texts, force_points=0.01, force_text=0.01)
 
     plt.xlabel('rank of t-test', fontsize = 18)
-    plt.ylabel('-log p value', fontsize = 18)
+    plt.ylabel('-log10 p value', fontsize = 18)
     plt.xticks(fontsize = 15, rotation=20)
     plt.yticks(fontsize = 15)
+
+
+plot_ranking(panob, 'HDAC1')
+plot_ranking(fimep, 'HDAC1')
 

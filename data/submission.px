@@ -1,0 +1,41 @@
+MTD	submitter_name	Hongchao Ji
+MTD	submitter_email	ji.hongchao@foxmail.com
+MTD	submitter_affiliation	Southern University of Science and Technology
+MTD	submitter_pride_login	ji.hongchao@foxmail.com
+MTD	lab_head_name	Chris Soon Heng Tan
+MTD	lab_head_email	chris.tan.sh@gmail.com
+MTD	lab_head_affiliation	Southern University of Science and Technology
+MTD	project_title	Pooled Strategy for High-Throughput Drug Target Deconvolution
+MTD	project_description	Target deconvolution is a crucial in drug discovery but is a costly and time-consuming work that hinder large-scale profiling. We present a pooled strategy which mixes multiple drugs into samples in optimized permutation and delineates targets of each drug with mathematical processing. We validated this strategy with thermal proteome profiling (TPP) profiling 15 drugs concurrently, increasing throughput by 60x while maintaining similar performance. Furthermore, we found BRAF and CSNK2A are the potential off-targets of bafetinib and abemaciclib, respectively.
+MTD	keywords	TPP, CETSA, drug-target deconvolution, pooled strategy
+MTD	sample_processing_protocol	K562 cells were cultured in an incubator at 37 °C, 95% humidity and 5% CO2, with 1640 medium plus 10 % FBS serum. Cells were harvested in 50 ml centrifuge tube, and washed twice with ice-cold PBS where supernatant was discarded after centrifugation at 900 rpm for 5 min. Cells were collected into a 1.5mL tube, and 1.2mL ice PBS and centrifuge to remove the supernatant. Harvested cells were lysed in a lysis buffer (50 mM HEPES, pH 7.5, 5 mM β-glycerophosphate, 0.1 mM activated Na3VO4, 10 mM MgCl2, and 1 mM TCEP:) with EDTA-free protease inhibitors added freshly to the lysis buffer before use. Cells were freeze-thaw 3X by alternating the immersion of tubes between liquid nitrogen and a 37°C water bath. The cells were then pulled through a needle (25” gauge needle, 1ml volume) 10 times to facilitate cell lysis by mechanical crushing. Next, centrifugation is performed at 21000 rcf at 4°C for 20 minutes to collect the supernatant and protein concentration is determined with BCA reagent (BBI life sciences). Finally, K562 lysate was incubated with the mixed drugs at room temperature for 10 minutes, heated at 52℃ for 3 minutes. The control plex was heated at 37 degrees for 3 minutes then rapidly cooled to 4℃. For either 9×9 or 9×15 experiment, we obtained 9 mixed drug plex heated at 52-degree and two plex for 37-degree control sample. The samples were centrifuged at 21,000 rcf for 20 minutes at 4°C and the supernatant was collected.   We used the SISPROT's method5 to digest and label the samples. Proteins were denatured in a solution of 0.1% formic acid to acidify the sample. The SISPROT digestion device was filled with C18 disk (3 M Empore) and SCX/SAX 3mixed beads (1 mg, SCX: SAX = 1:1, Biosystems) into a standard 200 µL pipet tip6. SISPROT tip was washed with methanol and 100 mM PCB potassium citrate buffer (pH 3) and 10 mM PCB to balance the tip. The driving force was the centrifugal force of the centrifuge. The amount of protein at 37°C was 10 μg as the standard volume, and the same volume of samples from other groups is taken for acidification (final concentration is 0.1% (v/v) formic acid) and then loaded on the SISPROT tip. The tip was washed with 20% (v/v) acetonitrile (ACN) in 8 mM potassium citrate buffer (pH 3) and ACN. Incubate with 10 mM Tris(2-carboxyethyl) phosphine hydrochloride (TCEP) for 15 min at room temperature, The tips were then washed with 50 mM Tris-HCl, pH 8 before loading digestion solution 0.1 μg/μL trypsin (Promega) in 10 mM iodoacetamide, 100 mM Tris-HCl, pH 8 incubate at 37°C for 60 min. After digestion, peptides were washed with 500 mM NaCl from mixed beads to C18 before TMT-11 labeling for 30-60 min. After labeling, 1% FA was added and the peptides were washed with 80 % ACN for collection. All labeled peptide samples were mixed and lyophilized. Fraction was performed after mixing of 11 samples with TMT labels. We used a 200 μL pipette tip filled with C18 membrane as a carrier for fractionation. The C18 device was activated with methanol and 80 % (v/v) ACN, 0.5% (v/v) acetic acid, followed by 1% (v/v) FA to wash off the excess methanol solution. The lyophilized samples were diluted with 1% (v/v) FA and loaded onto a C18 apparatus. The C18 device was washed with 1% (v/v) FA solution and 5 mM ammonium formate, respectively. The collection bottles were then replaced with the collection devices with (3%, 5%, 7%, 9%, 11%, 13%, 15 %, 17%, 19%, 21%, 23%, 24%, 26%, 28%, 30%, 35%, 40%, 80%) ACN in 5 mM ammonium formate, pH 10. The effluent collected from 18 peptide fractions are (3%, 15%, 26%), (5%, 17%, 28%), (7%, 19%, 30%), (9%, 21%, 35%), (11%, 23%, 40%), (13%, 24%, 80%) CAN, which were then mixed together to get 6 fractions. Finally, the 6 fractions were lyophilized to dryness for MS analysis.
+MTD	data_processing_protocol	Obtained raw data files were analyzed with Proteome Discoverer (PD, version 2.4, Thermo Fisher Scientific). Software parameter setting: Human FASTA database from UniProt (reviewed database entries, downloaded on March 22, 2021); Mass tolerances for precursor was set at 20 ppm; fragment ions: 0.6 Da; Maximum missed cleavage for trypsin digestion: 2 missed cleavage; Methionine oxidation, asparagine and glutamine deamidation were set as variable modification and carbamoylmethylation was set as fixed modification. FDR control is set to 1% at the PSM and peptide levels. The co-isolation threshold for report ion quantification is set to 50%.
+MTD	experiment_type	[PRIDE, PRIDE:0000429, Shotgun proteomics, ]
+MTD	submission_type	PARTIAL
+MTD	species	[NEWT, 9606, Homo sapiens (Human), ]
+MTD	tissue	[BTO, BTO:0000214, cell culture, ]
+MTD	cell_type	[CL, CL:0000081, blood cell, ]
+MTD	disease	[DOID, DOID:12603, acute leukemia, ]
+MTD	instrument	[MS, MS:1003028, Orbitrap Exploris 480, ]
+MTD	modification	[MOD, MOD:01720, TMT6plex-126 reporter+balance reagent acylated residue, ]
+MTD	quantification	[PRIDE, PRIDE:0000314, TMT, ]
+
+FMH	file_id	file_type	file_path	file_mapping
+FME	0	OTHER	C:\Users\jihon\Downloads\px-submission-tool\px-submission-tool-2.5.4\checksum.txt	
+FME	1	RAW	D:\data\PL_Manuscript\20220304_PL_9_F1_2.raw	
+FME	2	RAW	D:\data\PL_Manuscript\20220304_PL_9_F2_2.raw	
+FME	3	RAW	D:\data\PL_Manuscript\20220304_PL_9_F3_2.raw	
+FME	4	RAW	D:\data\PL_Manuscript\20220304_PL_9_F4_2.raw	
+FME	5	RAW	D:\data\PL_Manuscript\20220304_PL_9_F5_2.raw	
+FME	6	RAW	D:\data\PL_Manuscript\20220304_PL_9_F6.raw	
+FME	7	RAW	D:\data\PL_Manuscript\PL_15drug_0101_F1.raw	
+FME	8	RAW	D:\data\PL_Manuscript\PL_15drug_0101_F2.raw	
+FME	9	RAW	D:\data\PL_Manuscript\PL_15drug_0101_F3.raw	
+FME	10	RAW	D:\data\PL_Manuscript\PL_15drug_0101_F4_2.raw	
+FME	11	RAW	D:\data\PL_Manuscript\PL_15drug_0101_F5_2.raw	
+FME	12	RAW	D:\data\PL_Manuscript\PL_15drug_0101_F6.raw	
+FME	13	SEARCH	D:\project\Pooled-TPP\data\protein_table_15drugs.csv	7,8,9,10,11,12
+FME	14	SEARCH	D:\project\Pooled-TPP\data\protein_table_9drugs.csv	1,2,3,4,5,6
+
+COM	Version:2.5.4
+COM	Dataset License:CC0

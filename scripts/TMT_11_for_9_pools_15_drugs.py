@@ -27,6 +27,9 @@ from core.core import *
 pool_matrix = pd.read_excel('data/sensing_matrix_15drugs.xlsx')
 pool_matrix[np.isnan(pool_matrix)] = 0
 
+plt.figure(dpi = 300)
+sns.heatmap(pool_matrix, cbar=False, cmap=['#ffffff', '#ff0000'], 
+            linecolor='black', linewidths=1)
 
 '''
 2. Drug Target Analysis with LASSO

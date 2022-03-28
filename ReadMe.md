@@ -24,6 +24,4 @@ conda install -c conda-forge rdkit
 
 # Contact
 
-For any questions, please contact:    
-[ji.hongchao@foxmail.com](mailto:ji.hongchao@foxmail.com)    
-[chris.tan.sh@gmail.com](mailto:chris.tan.sh@gmail.com)
+For any questions, please contact:  [ji.hongchao@foxmail.com](mailto:ji.hongchao@foxmail.com) and [chris.tan.sh@gmail.com](mailto:chris.tan.sh@gmail.com)

@@ -3,7 +3,9 @@
 Created on Thu Sep 30 13:50:13 2021
 
 @author: jihon
+version number 0.1
 """
+
 
 import numpy as np
 import pandas as pd
@@ -415,6 +417,11 @@ def plot_drugs(gene, scores, fold_changes, fc_thres = 1.05, score_thres=0.08, to
 
 
 def plot_boxplot(gene, drug, protein_table, pool_matrix):
+    '''
+    Task: 
+        Box plot for compare the abundance of the protein.
+    '''
+    
     protein_table['# PSMs'] = [max( np.array(str(i).split(';')).astype(int)) for i in  protein_table['# PSMs']]
     data = protein_table[protein_table['# PSMs'] > 4]
     data = data.reset_index(drop=True)
@@ -441,6 +448,13 @@ def plot_boxplot(gene, drug, protein_table, pool_matrix):
 
     
 def merge_replicate(ptable_1, ptable_2):  
+    '''
+    Task: 
+        Identify drug-target interaction based on lasso algorithm
+    Parameters:
+        ptable_1 and ptable_2 are both table of the quantitative proteomics output by PD.
+    '''
+    
     index = list(set(ptable_1['Accession']) | set(ptable_2['Accession']))
     
     val_cols_1 = [s for s in ptable_1.columns if 'Abundances (Normalized):' in s]

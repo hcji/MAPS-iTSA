@@ -10,7 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-method = ['TPP-TR', 'TPP-CCR', 'iTSA/PISA', 'Pooled-TPP/iTSA (9*9)', 'Pooled-TPP/iTSA (9*15)']
+method = ['TPP-TR', 'TPP-CCR', 'iTSA/PISA', 'MAPS-iTSA (9*9)', 'MAPS-iTSA (9*15)']
 drugTMT = np.array([1/4, 1/2, 1, 9, 15])
 
 

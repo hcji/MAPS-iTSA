@@ -25,7 +25,16 @@ from core.core import *
 
 # Here we use the pre-generated sensing matrix, because the generation has randomness
 pool_matrix = pd.read_excel('data/sensing_matrix_15drugs.xlsx')
-pool_matrix[np.isnan(pool_matrix)] = 0
+pool_matrix = pool_matrix.fillna(0)
+kin_inhibitor = [True, False, False, False, True, False, False, True, True, True, True, True, True, True, False]
+klist = []
+for i in range(len(kin_inhibitor)):
+    if not kin_inhibitor[i]:
+        k = np.arange(len(pool_matrix))
+    else:
+        k = np.where(np.logical_or(pool_matrix.iloc[:,-1] == 0, pool_matrix.iloc[:,i] == 1))[0]
+    klist.append(k)
+
 
 plt.figure(dpi = 300)
 sns.heatmap(pool_matrix, cbar=False, cmap=['#ffffff', '#ff0000'], 
@@ -36,13 +45,15 @@ sns.heatmap(pool_matrix, cbar=False, cmap=['#ffffff', '#ff0000'],
 '''
 
 # read protein table
-protein_table = pd.read_csv('data/preprocessed_15drugs.csv')
+input_path = 'data/preprocessed/PL_K562_F.csv'
+protein_table = pd.read_csv(input_path)
 
 # processing
-scores, fold_changes = post_analysis(protein_table, pool_matrix, drug_num = 3)
+scores, fold_changes = post_analysis(protein_table, pool_matrix, klist, drug_num = 3)
 
 # save results
-scores.to_csv('results/independent_15drugs.csv')
+output_path = input_path.replace('data/preprocessed', 'results')
+scores.to_csv(output_path)
 
 
 '''
@@ -57,7 +68,8 @@ drug_targets = {'Palbociclib': ['CDK4', 'CDK6'],
                 'Methotrexate': ['DHFR'], 
                 'Vemurafenib': ['BRAF'],
                 'SCIO-469': ['MAPK14'],
-                'SL-327': ['MAP2K1', 'MAP2K2']}
+                'SL-327': ['MAP2K1', 'MAP2K2'],
+                'Olaparib': ['PARP1']}
 
 
 for d, genes in drug_targets.items():
@@ -65,7 +77,7 @@ for d, genes in drug_targets.items():
 
 
 # exploratory drugs
-drugs = ['Bafetinib', 'Abemaciclib', 'OTS964', 'Olaparib', 'CCT137690', 'Belumosudil', 'Parthenolide']
+drugs = ['Bafetinib', 'Abemaciclib', 'OTS964', 'CCT137690', 'Belumosudil', 'Staurosporine']
 
 for i, d in enumerate(drugs):
     plot_results(d, scores, fold_changes, fc_thres = 1.1, score_thres=0.15, top_markers = 8)

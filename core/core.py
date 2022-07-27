@@ -6,6 +6,8 @@ Created on Thu Sep 30 13:50:13 2021
 version number 0.1
 """
 
+import warnings
+warnings.filterwarnings("ignore")
 
 import numpy as np
 import pandas as pd
@@ -190,7 +192,27 @@ def group_drugs(drugs, preds, pools):
     return output
 
 
-def post_analysis(protein_table, pool_matrix, drug_num = 3):
+def lasso_score(X, y, kk, index, drug_num):
+    if kk is not False:
+        y1 = y[kk]
+        y1 = np.log2(y1 / np.min(y1))
+        X1 = X[kk,:]
+    else:
+        y1 = y
+        X1 = X
+    _, _, coefs = linear_model.lars_path(X1, y1, positive=True, method="lasso")
+
+    xx = np.sum(np.abs(coefs.T), axis=1)
+    xx /= xx[-1]
+    vip = coefs[:,drug_num] - np.min(coefs[np.nonzero(coefs[:,drug_num]),3])
+    vip[vip < 0] = 0
+    if index is not False:
+        return vip[index]
+    else:
+        return vip
+    
+
+def post_analysis(protein_table, pool_matrix, klist = False, drug_num = 3):
     '''
     Task: 
         Identify drug-target interaction based on lasso algorithm
@@ -217,66 +239,26 @@ def post_analysis(protein_table, pool_matrix, drug_num = 3):
         p = data.loc[i, 'Accession']
         g = data.loc[i, 'Gene Symbol']
         y = data.loc[i, cols].values.astype(float)
-        kk = np.where(~np.isnan(y))[0]
-        if len(kk) == 0:
+        
+        if np.isnan(np.max(y)):
             continue
         elif np.nanmax(y) == 0:
             continue
-        else:
-            y1 = y[kk]
-            y1 = np.log2(y1 / np.min(y1))
         
-        X1 = X[kk,:]
-        '''
-        for i in range(X1.shape[0]):
-            sums = np.sum(X1[i,:])
-            if sums == 0:
-                sums = 1
-            X1[i,:] /= sums
-        '''
-        _, _, coefs = linear_model.lars_path(X1, y1, positive=True, method="lasso")
+        if klist:
+            vip = []
+            for j in range(pool_matrix.shape[1]):
+                k = klist[j]
+                s = lasso_score(X, y, k, j, drug_num)
+                vip.append(s)
+            vip = np.array(vip)
+        else:
+            vip = lasso_score(X, y, False, False, drug_num)
+            
         ind_1 = [np.where(X[:,i] == 1)[0] for i in range(X.shape[1])]
         ind_2 = [np.where(X[:,i] == 0)[0] for i in range(X.shape[1])]
-        foldc = [np.nanmedian(y[ind_1[i]]) / np.nanmedian(y[ind_2[i]]) for i in range(X.shape[1])]
-        
-        xx = np.sum(np.abs(coefs.T), axis=1)
-        xx /= xx[-1]
-        
-        '''
-        x2 = ['Others', 'Others', 'Others', 'MTX', 'Others', 'MTX', 'Others', 'Others', 'MTX']
-        y2 = np.log2(y)
-        pltdata = pd.DataFrame({'pools': x2, 'log2_abundance': y2})
-        plt.figure(dpi = 300)
-        sns.boxplot(x="pools", y="log2_abundance", data=pltdata)
-        plt.xticks(fontsize = 14)
-        plt.yticks(fontsize = 14)
-        plt.xlabel("group", fontsize=18)
-        plt.ylabel("log2 abundance", fontsize=18)
-        '''
-        
-        '''
-        plt.figure(figsize = (4,6), dpi = 250)
-        for j in range(coefs.shape[0]):
-            if j == 1:
-                plt.plot(xx, coefs[j,:], color='r', label='Panob')
-            elif j == 5:
-                plt.plot(xx, coefs[j,:], color='b', label='Fimep')
-            else:
-                plt.plot(xx, coefs[j,:], color='grey')
-                
-        plt.legend(fontsize = 20, loc='upper left')
-        plt.ylim(0, 2.5)
-        ymin, ymax = plt.ylim()
-        # plt.vlines(xx, ymin, ymax, linestyle="dashed")
-        plt.xticks(fontsize = 20)
-        plt.yticks(fontsize = 20)
-        # plt.xlabel("|coef| / max|coef|", fontsize=14)
-        # plt.ylabel("Coefficients", fontsize=14)
-        # plt.axis("tight")
-        plt.show()
-        '''
-        vip = coefs[:,drug_num] - np.min(coefs[np.nonzero(coefs[:,drug_num]),3])
-        vip[vip < 0] = 0
+        foldc = [np.nanmedian(y[ind_1[i]]) / np.nanmin(y[ind_2[i]]) for i in range(X.shape[1])]
+
         res_1 = [p, g] + list(vip)
         res_2 = [p, g] + list(foldc)
         scores.append(res_1)
@@ -349,7 +331,7 @@ def plot_results(drug, scores, fold_changes, true_targets=[], fc_thres = 1.05, s
 
     plt.axvline(x = np.log2(fc_thres), ls = '--', color = 'black', lw = 1)
     plt.axhline(y = score_thres, ls = '--', color = 'black', lw = 1)
-    plt.legend(loc='upper left', fontsize = 12)
+    plt.legend(fontsize = 12)
     plt.xticks(fontsize = 15, rotation = 20)
     plt.yticks(fontsize = 15)
     plt.xlabel('log2 FC', fontsize = 18)
@@ -408,7 +390,7 @@ def plot_drugs(gene, scores, fold_changes, fc_thres = 1.05, score_thres=0.08, to
 
     # plt.axvline(x = np.log2(fc_thres), ls = '--', color = 'black', lw = 1)
     plt.axhline(y = score_thres, ls = '--', color = 'black', lw = 1)
-    plt.legend(loc='upper left', fontsize = 12)
+    plt.legend(fontsize = 12)
     plt.xticks(fontsize = 15, rotation=45)
     plt.yticks(fontsize = 15)
     plt.xlabel('log2 FC', fontsize = 18)

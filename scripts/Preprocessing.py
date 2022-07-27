@@ -6,11 +6,9 @@ Created on Mon Mar  7 09:44:12 2022
 """
 
 
+import os
 import numpy as np
 import pandas as pd
-
-ptable_1 = pd.read_csv('data/protein_table_9drugs.csv')
-ptable_2 = pd.read_csv('data/protein_table_15drugs.csv')
 
 
 def add_gene_name(data):   
@@ -89,14 +87,12 @@ def combine_double(ptable_1, ptable_2):
     return result
 
 
-ptable_1 = add_gene_name(ptable_1)
-ptable_2 = add_gene_name(ptable_2)
+files = ['data/raw/{}'.format(f) for f in os.listdir('data/raw')]
 
-new_ptable_1 = preprocess_single(ptable_1)
-new_ptable_2 = preprocess_single(ptable_2)
-
-new_ptable_1.to_csv('data/preprocessed_9drugs.csv', index = False)
-new_ptable_2.to_csv('data/preprocessed_15drugs.csv', index = False)
-
-combined_table = combine_double(ptable_1, ptable_2)
-combined_table.to_csv('data/preprocessed_combined.csv', index = False)
+for f in files:
+    ptable = pd.read_excel(f)
+    ptable = add_gene_name(ptable)
+    new_ptable = preprocess_single(ptable)
+    f_new = f.replace('raw', 'preprocessed')
+    f_new = f_new.replace('xlsx', 'csv')
+    new_ptable.to_csv(f_new, index = False)

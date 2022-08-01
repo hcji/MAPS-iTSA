@@ -35,12 +35,14 @@ def preprocess_single(data):
     return new_data
     
 
-def combine_double(ptable_1, ptable_2):  
-    index = list(set(ptable_1['Accession']) | set(ptable_2['Accession']))
+def combine_double(ptable_1, ptable_2): 
+    # only for technical replicates
+    # not used in this work
     
+    index = list(set(ptable_1['Accession']) | set(ptable_2['Accession']))
     val_cols_1 = [s for s in ptable_1.columns if 'Abundances (Normalized):' in s]
     val_cols_2 = [s for s in ptable_2.columns if 'Abundances (Normalized):' in s]
-    
+
     x1 = ptable_1[val_cols_1]
     x2 = ptable_2[val_cols_2]
     r1 = np.mean(x1.iloc[:,[-1,-2]], axis = 1)

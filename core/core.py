@@ -297,13 +297,13 @@ def plot_results(drug, scores, fold_changes, true_targets=[], fc_thres = 1.05, s
     pltdata = pltdata.sort_values(by = 'Group', ascending=False)
     pltdata = pltdata.reset_index(drop = True)
     
-    plt.figure(dpi = 250)
-    # plt.title(drug, loc='left', fontsize = 20)
+    # plt.figure(dpi = 300)
+    plt.title(drug, loc='left', fontsize = 20)
     flatui = ['#FF0000', '#C0C0C0']
     # scatter_cmap = ListedColormap(sns.color_palette(flatui).as_hex())
     
     sns.scatterplot(data=pltdata, x="Fold Change", y="Score", hue="Group",
-                    palette = flatui,
+                    palette = flatui, legend = False,
                     hue_order=['Significant', 'Not significant'] )
     
     markers = pltdata[pltdata['Group'] == 'Significant']
@@ -315,9 +315,9 @@ def plot_results(drug, scores, fold_changes, true_targets=[], fc_thres = 1.05, s
     for i in markers.index:
         x, y, s = markers.loc[i, 'Fold Change'], markers.loc[i, 'Score'], str(markers.loc[i, 'Gene Symbol']).split(';')[0]
         if s in true_targets:
-            texts.append(plt.text(x, y, s, color = 'red', fontsize = 14, weight = 'semibold'))
+            texts.append(plt.text(x, y, s, color = 'red', fontsize = 13, weight = 'semibold'))
         else:
-            texts.append(plt.text(x, y, s, fontsize = 13))
+            texts.append(plt.text(x, y, s))
         labels.append(s)
     
     for i in pltdata.index:
@@ -331,12 +331,12 @@ def plot_results(drug, scores, fold_changes, true_targets=[], fc_thres = 1.05, s
 
     plt.axvline(x = np.log2(fc_thres), ls = '--', color = 'black', lw = 1)
     plt.axhline(y = score_thres, ls = '--', color = 'black', lw = 1)
-    plt.legend(fontsize = 12)
+    # plt.legend(fontsize = 10)
     plt.xticks(fontsize = 15, rotation = 20)
     plt.yticks(fontsize = 15)
     plt.xlabel('log2 FC', fontsize = 18)
     plt.ylabel('LASSO score', fontsize = 18)
-    plt.show()
+    # plt.show()
     pass
 
 
@@ -369,7 +369,7 @@ def plot_drugs(gene, scores, fold_changes, fc_thres = 1.05, score_thres=0.08, to
     pltdata = pltdata.sort_values(by = 'Group', ascending=False)
     pltdata = pltdata.reset_index(drop = True)
     
-    plt.figure(dpi = 250)
+    # plt.figure(dpi = 250)
     flatui = ['#FF0000', '#C0C0C0']
     sns.scatterplot(data=pltdata, x="Fold Change", y="Score", hue="Group",
                     palette = flatui,
@@ -395,7 +395,7 @@ def plot_drugs(gene, scores, fold_changes, fc_thres = 1.05, score_thres=0.08, to
     plt.yticks(fontsize = 15)
     plt.xlabel('log2 FC', fontsize = 18)
     plt.ylabel('score', fontsize = 18)
-    plt.show()
+    # plt.show()
 
 
 def plot_boxplot(gene, drug, protein_table, pool_matrix):

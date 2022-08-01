@@ -18,12 +18,12 @@ conda install -c conda-forge rdkit
 
 # Examples and documents
 
-* Examples: run the unittests in [results folder](https://github.com/hcji/Pooled-TPP/tree/main/scripts)
+* Examples: run the unittests in [notebook](https://github.com/hcji/MAPS-iTSA/tree/main/notebook) folder.
+* Documents: usages of major functions are provoided as their [docstrings](https://github.com/hcji/MAPS-iTSA/blob/main/core/core.py)
 
-* Documents: usages of major functions are provoided as their [docstrings](https://github.com/hcji/Pooled-TPP/blob/main/core/core.py)
 
 # Contact
 
-For any questions, please contact:
+For any questions, please contact:    
 [ji.hongchao@foxmail.com](mailto:ji.hongchao@foxmail.com)    
 [chris.tan.sh@gmail.com](mailto:chris.tan.sh@gmail.com)

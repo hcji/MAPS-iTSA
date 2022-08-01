@@ -25,7 +25,7 @@ from tqdm import tqdm
 from adjustText import adjust_text
 
 
-def generate_sensing_matrix(n_pools = 9, n_drugs = 15, n_replicates = 3):
+def generate_sensing_matrix(n_pools = 9, n_drugs = 15, n_replicates = 3, plot_his = True):
     '''
     Task: 
         Generate sensing matrix, which indicate how the drugs pool.
@@ -59,12 +59,13 @@ def generate_sensing_matrix(n_pools = 9, n_drugs = 15, n_replicates = 3):
     pool = mat(x)
     
     # plot history
-    his = pd.DataFrame(ga.all_history_Y)
-    fig, ax = plt.subplots(2, 1, figsize=(5,5), dpi=300)
-    ax[0].plot(his.index, his.values, '.', color='red')
-    his.min(axis=1).cummin().plot(kind='line')
-    plt.xlabel('Index', fontsize = 12)
-    plt.show()    
+    if plot_his:
+        his = pd.DataFrame(ga.all_history_Y)
+        fig, ax = plt.subplots(2, 1, figsize=(5,5), dpi=300)
+        ax[0].plot(his.index, his.values, '.', color='red')
+        his.min(axis=1).cummin().plot(kind='line')
+        plt.xlabel('Index', fontsize = 12)
+        plt.show()    
     return pool
 
 

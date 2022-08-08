@@ -200,6 +200,7 @@ def lasso_score(X, y, kk, index, drug_num):
         X1 = X[kk,:]
     else:
         y1 = y
+        y1 = np.log2(y1 / np.min(y1))
         X1 = X
     _, _, coefs = linear_model.lars_path(X1, y1, positive=True, method="lasso")
 

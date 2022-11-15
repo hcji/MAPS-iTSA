@@ -1,7 +1,7 @@
 MAPS-iTSA
 ===========================
 
-This repository contains preprocessing scripts of the manuscript, entitled "Matrix-Augmented Pooling Strategy for High-Throughput Target Deconvolution Reveals Cell Type Off-targets and Responses" (submitted). 
+This repository contains processing scripts of the manuscript, entitled "Matrix-Augmented Pooling Strategy for High-Throughput Target Deconvolution Reveals Cell Type Off-targets and Responses" (submitted). 
 
 # Install
 

@@ -1,9 +1,9 @@
 MAPS-iTSA
 ===========================
 
-![Alt](https://repobeats.axiom.co/api/embed/5dbe01b95d90f4771b814345f9e862b7e93ff860.svg "Repobeats analytics image")
-
 This repository contains processing scripts of the manuscript, entitled "Matrix-Augmented Pooling Strategy for High-Throughput Target Deconvolution Reveals Cell Type Off-targets and Responses" (In revision). 
+
+![Alt](https://repobeats.axiom.co/api/embed/5dbe01b95d90f4771b814345f9e862b7e93ff860.svg "Repobeats analytics image")
 
 # Install
 

@@ -26,3 +26,5 @@ conda install -c conda-forge rdkit
 For any questions, please contact:    
 [ji.hongchao@foxmail.com](mailto:ji.hongchao@foxmail.com)    
 [chris.tan.sh@gmail.com](mailto:chris.tan.sh@gmail.com)
+
+![Alt](https://repobeats.axiom.co/api/embed/5dbe01b95d90f4771b814345f9e862b7e93ff860.svg "Repobeats analytics image")
